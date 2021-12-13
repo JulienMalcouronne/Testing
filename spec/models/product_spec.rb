@@ -26,4 +26,12 @@ RSpec.describe Product, type: :model do
       expect(new_product.errors[:title]).to include('has already been taken')
     end
   end
+  describe 'price' do
+    it 'validates a price higher than 0' do
+      @invalid_price.save
+      last_product = @invalid_price
+      last_product.valid?
+      expect(last_product.errors[:price]).to include('price must be higher than 0')
+    end
+  end
 end
